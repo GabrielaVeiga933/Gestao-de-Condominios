@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro de Apartamento</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #6A5ACD;
+      --secondary: #191970;
+      --accent: #6959CD;
+      --extra: #836FFF;
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --radius: 8px;
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+    h1 {
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    form { display: flex; flex-direction: column; }
+    input {
+      padding: 12px;
+      margin: 8px 0;
+      border: 2px solid #ddd;
+      border-radius: var(--radius);
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: var(--accent); transform: scale(1.05); }
+    a {
+      margin-top: 20px;
+      color: var(--secondary);
+      text-decoration: none;
+      display: inline-block;
+    }
+    a:hover { color: var(--extra); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1><i class="fas fa-door-open"></i> Cadastrar Apartamento</h1>
+    <form action="/apartamento/cadastrar" method="POST">
+      <input type="number" name="numero" placeholder="Número" required>
+      <input type="text" name="bloco" placeholder="Bloco" required>
+      <button type="submit"><i class="fas fa-check"></i> Cadastrar</button>
+    </form>
+    <a href="/apartamentos"><i class="fas fa-arrow-left"></i> Voltar à Lista</a>
+  </div>
+</body>
+</html>

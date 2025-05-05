@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Manutenção</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #6A5ACD;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #6959CD;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <form action="/tipoManutencao/registrar" method="POST" onsubmit="return validarCampos()">
+        <label>Tipo:</label>
+        <select name="tipo" id="tipo" required>
+            <option value="">Selecione</option>
+            <!-- As opções serão preenchidas pelo Node.js -->
+        </select><br/>
+        <label>Data:</label>
+        <input type="date" name="data" id="data" required><br/>
+        <label>Local:</label>
+        <input type="text" name="local" id="local" required><br/>
+        <button type="submit">Cadastrar</button>
+        <button type="button" onclick="history.back()">Voltar</button>
+    </form>
+
+    <script>
+        function validarCampos() {
+            const tipo = document.getElementById('tipo').value;
+            const data = document.getElementById('data').value;
+            const local = document.getElementById('local').value;
+            if (!tipo || !data || !local) {
+                alert('Dados obrigatórios não informados');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
