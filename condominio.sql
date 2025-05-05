@@ -53,7 +53,7 @@ CREATE TABLE referencia (
   UNIQUE KEY uq_referencia (mes, ano)
 );
 
--- 6) Tabela de Pagamentos
+
 CREATE TABLE pagamento (
   id INT AUTO_INCREMENT PRIMARY KEY,
   moradores_id INT NOT NULL,
