@@ -1,3 +1,4 @@
+
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
@@ -10,7 +11,7 @@ app.use(express.static('public'));
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'Lynx1208!',
+    password: 'root',
     database: 'condominio',
     port:3306
 });
@@ -39,9 +40,7 @@ app.get('/cadastrarMorador', (req, res) => {
     res.sendFile(__dirname + '/cadastrarm.html');
 });
 
-app.get('/pagamentos', (req, res) => {
-    res.sendFile(__dirname + '/pagamentos.html');
-});
+
 app.get('/', (req, res) => {
     res.redirect('/tipoManutencao/cadastrar');
 });
@@ -53,94 +52,97 @@ app.get('/registrarManutencao', (req, res) => {
 
 
 
-app.get('/blocos', (req, res) => {
-    const blocos = 'SELECT * FROM blocos';
-    connection.query(blocos, function(err, rows){
+        app.get('/blocos', (req, res) => {
+        const blocos = 'SELECT * FROM blocos';
+        connection.query(blocos, function(err, rows){
         if (!err) {
-            res.send(`
-              <html>
-<head>
-    <title>Blocos Cadastrados</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <style>
+        res.send(`
+
+        <html>
+        <head>
+        <title>Blocos Cadastrados</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+        <style>
         html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+        height: 100%;
+        margin: 0;
+        padding: 0;
         }
 
         body {
-            font-family: Arial;
-            background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740')
-                        no-repeat center center fixed;
-            background-size: cover;
-            text-align: center;
-            position: relative;
+        font-family: Arial;
+        background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740')
+        no-repeat center center fixed;
+        background-size: cover;
+        text-align: center;
+        position: relative;
         }
 
         h1 {
-            color: #fff;
-            margin: 20px 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        color: #fff;
+        margin: 20px 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         table {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.9);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+        border: 1px solid #ddd;
+        padding: 12px;
         }
 
         th {
-            background-color: #191970;
-            color: #fff;
+        background-color: #191970;
+        color: #fff;
         }
 
         td {
-            background-color: #E6E6FA;
+        background-color: #E6E6FA;
         }
 
         tr:nth-child(even) td {
-            background-color: #f0eaff;
+        background-color: #f0eaff;
         }
 
         .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
         }
 
         .botao {
-            background: #6A5ACD;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            transition: background 0.3s, transform 0.2s;
+        background: #6A5ACD;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        transition: background 0.3s, transform 0.2s;
         }
 
         .botao:hover {
-            background: #6959CD;
-            transform: scale(1.1);
+        background: #6959CD;
+        transform: scale(1.1);
         }
 
-        .botao i.fa-trash { color: #b493f5; }
-        .botao i.fa-edit  { color: #b493f5;}
+        .botao i.fa-trash { color: #f3f3f3; }
+        .botao i.fa-edit  { color: #fafafa;}
         .botao i.fa-plus  { color: #f0ecf9; }
-        .botao i.fas fa-arrow-left { color: #f0ecf9; }
+        .botao i.fas fa-arrow-left { color: #f0ecf9; 
+        }
+
 
         .button-row {
-            margin: 30px 0;
+        margin: 30px 0;
         }
 
          </style>
@@ -157,30 +159,30 @@ app.get('/blocos', (req, res) => {
 
         <table id="blocosTable">
         <tr>
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Qtd. Aptos</th>
-            <th>Ações</th>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Qtd. Aptos</th>
+        <th>Ações</th>
         </tr>
 
         ${rows.map(row => `
-            <tr>
-                <td>${row.id}</td>
-                <td>${row.descricao}</td>
-                <td>${row.qtd_apartamentos}</td>
-                <td>
-                    <div class="action-buttons">
-                         <a href="/bloco/excluir/${row.id}" class="botao" title="Excluir"
-                        onclick="return confirm('Tem certeza que deseja excluir este bloco?')">
-                        <i class="fas fa-trash"></i>
-                        </a>
-                        </a>
-                        <a href="/bloco/editar/${row.id}" class="botao" title="Editar">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+        <td>${row.id}</td>
+        <td>${row.descricao}</td>
+        <td>${row.qtd_apartamentos}</td>
+        <td>
+        <div class="action-buttons">
+        <a href="/bloco/excluir/${row.id}" class="botao" title="Excluir"
+        onclick="return confirm('Tem certeza que deseja excluir este bloco?')">
+        <i class="fas fa-trash"></i>
+        </a>
+        </a>
+        <a href="/bloco/editar/${row.id}" class="botao" title="Editar">
+        <i class="fas fa-edit"></i>
+        </a>
+        </div>
+        </td>
+        </tr>
         `).join('')}
          </table>
         <div class="button-row">
@@ -196,21 +198,21 @@ app.get('/blocos', (req, res) => {
 
         <script>
         document.getElementById('searchBar').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#blocosTable tr:not(:first-child)');
-            rows.forEach(row => {
-            const descricao = row.cells[1].textContent.toLowerCase();
-            row.style.display = descricao.includes(searchValue) ? '' : 'none';
-            });
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#blocosTable tr:not(:first-child)');
+        rows.forEach(row => {
+        const descricao = row.cells[1].textContent.toLowerCase();
+        row.style.display = descricao.includes(searchValue) ? '' : 'none';
+        });
         });
         </script>
 
         </body>
         </html>
-            `);
+        `);
         } else {
-            console.log('Erro ao buscar blocos:', err);
-            res.send('Erro!');
+        console.log('Erro ao buscar blocos:', err);
+        res.send('Erro!');
         }
         });
         });
@@ -220,11 +222,11 @@ app.get('/blocos', (req, res) => {
         const insert = 'INSERT INTO blocos (descricao, qtd_apartamentos) VALUES (?, ?)';
         connection.query(insert, [descricao, qtd_apartamentos], (err, result) => {
         if (!err) {
-            console.log('Bloco cadastrado com sucesso!');
-            res.redirect('/blocos');
+        console.log('Bloco cadastrado com sucesso!');
+        res.redirect('/blocos');
         } else {
-            console.log('Erro ao cadastrar bloco:', err);
-            res.send('Erro!');
+        console.log('Erro ao cadastrar bloco:', err);
+        res.send('Erro!');
         }
         });
         });
@@ -233,31 +235,32 @@ app.get('/blocos', (req, res) => {
         const id = req.params.id;
         const del = 'DELETE FROM blocos WHERE id = ?';
         connection.query(del, [id], (err, result) => {
-            if (!err) {
-            console.log('Bloco excluído com sucesso!');
-            res.redirect('/blocos');
+        if (!err) {
+        console.log('Bloco excluído com sucesso!');
+        res.redirect('/blocos');
         } else {
-            console.log('Erro ao excluir bloco:', err);
-            res.send('Erro!');
+        console.log('Erro ao excluir bloco:', err);
+        res.send('Erro!');
         }
         });
         });
+
         app.get('/bloco/editar/:id', (req, res) => {
         const id = req.params.id;
         const query = 'SELECT * FROM blocos WHERE id = ?';
         connection.query(query, [id], (err, rows) => {
         if (!err && rows.length > 0) {
-            const bloco = rows[0];
-            res.send(`
-                <html>
-                <head>
-                    <title>Editar Bloco</title>
-                    <style>
-            html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            }
+        const bloco = rows[0];
+        res.send(`
+        <html>
+        <head>
+        <title>Editar Bloco</title>
+        <style>
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
 
         body {
         font-family: Arial, sans-serif;
@@ -293,21 +296,21 @@ app.get('/blocos', (req, res) => {
         background:rgb(82, 66, 185); 
         transform: scale(1.05); 
         }
-                </style>
-                </head>
-                <body>
-                    <form action="/bloco/editar/${id}" method="POST">
-                        <input type="text" name="descricao" value="${bloco.descricao}" placeholder="Descrição" required>
-                        <input type="number" name="qtd_apartamentos" value="${bloco.qtd_apartamentos}" placeholder="Qtd. Apartamentos" required>
-                        <button type="submit">Salvar</button>
-                    </form>
-                </body>
-                </html>
-            `);
+        </style>
+        </head>
+        <body>
+        <form action="/bloco/editar/${id}" method="POST">
+        <input type="text" name="descricao" value="${bloco.descricao}" placeholder="Descrição" required>
+        <input type="number" name="qtd_apartamentos" value="${bloco.qtd_apartamentos}" placeholder="Qtd. Apartamentos" required>
+        <button type="submit">Salvar</button>
+        </form>
+        </body>
+        </html>
+        `);
 
         } else {
-            console.log('Erro ao buscar bloco:', err);
-            res.send('Erro!');
+        console.log('Erro ao buscar bloco:', err);
+        res.send('Erro!');
         }
         });
         });
@@ -318,11 +321,11 @@ app.get('/blocos', (req, res) => {
         const update = 'UPDATE blocos SET descricao = ?, qtd_apartamentos = ? WHERE id = ?';
         connection.query(update, [descricao, qtd_apartamentos, id], (err, result) => {
         if (!err) {
-            console.log('Bloco editado com sucesso!');
-            res.redirect('/blocos');
+        console.log('Bloco editado com sucesso!');
+        res.redirect('/blocos');
         } else {
-            console.log('Erro ao editar bloco:', err);
-            res.send('Erro!');
+        console.log('Erro ao editar bloco:', err);
+        res.send('Erro!');
         }
         });
         });
@@ -331,7 +334,7 @@ app.get('/blocos', (req, res) => {
         const query = 'SELECT * FROM apartamentos';
         connection.query(query, (err, rows) => {
         if (!err) {
-            res.send(`
+        res.send(`
         <html>
         <head>
         <title>Apartamentos Cadastrados</title>
@@ -344,10 +347,10 @@ app.get('/blocos', (req, res) => {
         }
 
         body {
-            font-family: Arial;
-            background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
-            background-size: cover;
-            text-align: center;
+        font-family: Arial;
+        background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+        background-size: cover;
+        text-align: center;
         }
 
         h1 { color: #fff; 
@@ -356,11 +359,11 @@ app.get('/blocos', (req, res) => {
         }
 
         table {
-            width: 90%; 
-            margin: 20px auto; 
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.9); 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        width: 90%; 
+        margin: 20px auto; 
+        border-collapse: collapse;
+        background: rgba(255,255,255,0.9); 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         th, td { 
@@ -867,63 +870,232 @@ app.get('/blocos', (req, res) => {
     });
 
 
-    //professora, totalmente chateado essa parte, tentei, chorei e nem com chat consegui fazer isso funcionar direito, perdi todos meu neuronios com isso ;/
-    app.get('/api/referencias', (req, res) => {
-    db.query(
-    'SELECT id, mes, ano, valor, vencimento FROM referencia ORDER BY ano DESC, mes DESC',
-    (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
+
+    app.get('/pagamentos/criar', function(req, res) {
+    const hoje = new Date();
+    const mesAtual = hoje.getMonth() + 1;
+    const anoAtual = hoje.getFullYear();
+    const referenciaAtual = `${anoAtual}-${mesAtual.toString().padStart(2, '0')}-01`;
+    const vencimento = new Date(anoAtual, mesAtual, 10).toISOString().split('T')[0];
+    
+    const queryApartamentos = `
+    SELECT a.id, a.numero, b.descricao as bloco_descricao 
+    FROM apartamentos a
+    JOIN blocos b ON a.bloco_id = b.id
+    ORDER BY b.descricao, a.numero
+    `;
+    
+        
+    connection.query(queryApartamentos, function(err, apartamentos) {
+    if (err) return res.status(500).send("Erro ao carregar formulário");
+    
+    const renderBaseTemplate = (content) => `
+    <!DOCTYPE html>
+
+
+    <style>
+
+    <style>
+    <script>
+    function buscarDados() {
+    const apartamentoId = document.getElementById('apartamento_id').value;
+    window.location.href = '/pagamentos/criar?apartamento_id=' + apartamentoId;
     }
-    );
-    });
-    app.get('/api/pagamentos', (req, res) => {
-    db.query('SELECT * FROM pagamento ORDER BY data_pagamento DESC', (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json(results);
-    });
-    });
-    app.post('/api/pagamentos', (req, res) => {
-    const { morador, apartamento, bloco, mes, ano, data_pagamento, valor_pago } = req.body;
-  
-    if (!morador || !mes || !ano || !data_pagamento || !valor_pago) {
-      return res.status(400).json({ error: 'Campos obrigatórios faltando' });
+                        
+    function validarFormulario() {
+    const apartamento = document.getElementById('apartamento_id').value;
+    const dataPagamento = document.getElementById('data_pagamento').value;
+    const valorPago = document.getElementById('valor_pago').value;
+                            
+    if (!apartamento) { alert('Selecione um apartamento válido'); return false; }
+    if (!dataPagamento) { alert('Informe a data do pagamento'); return false; }
+    if (!valorPago || isNaN(valorPago)) { alert('Informe um valor válido'); return false; }
+                            
+    return true;
     }
-  
-    // Buscar o ID do morador
-    const moradorSql = 'SELECT id FROM moradores WHERE nome = ? AND apartamento = ? AND bloco = ? LIMIT 1';
-    db.query(moradorSql, [morador, apartamento, bloco], (err, moradorResults) => {
-      if (err) return res.status(500).json({ error: 'Erro ao buscar morador' });
-      if (moradorResults.length === 0) return res.status(404).json({ error: 'Morador não encontrado' });
-  
-      const moradores_id = moradorResults[0].id;
-  
-      // Buscar o ID da referência
-      const refSql = 'SELECT id FROM referencia WHERE mes = ? AND ano = ? LIMIT 1';
-      db.query(refSql, [mes, ano], (err, refResults) => {
-        if (err) return res.status(500).json({ error: 'Erro ao buscar referência' });
-        if (refResults.length === 0) return res.status(404).json({ error: 'Referência não encontrada' });
-  
-        const referencia_id = refResults[0].id;
-  
-        // Inserir o pagamento
-        const insertSql = `
-          INSERT INTO pagamento (moradores_id, referencia_id, data_pagamento, valor_pago)
-          VALUES (?, ?, ?, ?)
-        `;
-        db.query(insertSql, [moradores_id, referencia_id, data_pagamento, valor_pago], (err, result) => {
-          if (err) {
-            if (err.code === 'ER_DUP_ENTRY') {
-              return res.status(409).json({ error: 'Pagamento já registrado' });
-            }
-            return res.status(500).json({ error: err.message });
-          }
-          res.status(201).json({ id: result.insertId });
-        });
-      });
+    </script>
+    </head>
+    <body>
+    <div class="app-container">
+    </div>
+    </body>
+    </html>
+    `;
+    
+    if (req.query.apartamento_id) {
+    const apartamentoId = req.query.apartamento_id;
+                
+    const queryMorador = `
+    SELECT m.cpf, m.nome, m.telefone 
+    FROM moradores m
+    WHERE m.apartamento_id = ? AND m.responsavel = 1
+    LIMIT 1
+    `;
+                
+    connection.query(queryMorador, [apartamentoId], function(err, moradores) {
+    if (err) return res.send(renderBaseTemplate(`
+    <div class="error-message">Erro ao buscar dados do apartamento</div>
+    <a href="/pagamentos/criar" class="btn-primary">Voltar</a>
+    `));
+                    
+    if (moradores.length === 0) {
+    return res.send(renderBaseTemplate(`
+    <div class="error-message">Apartamento não possui morador responsável</div>
+    <a href="/pagamentos/criar" class="btn-primary">Voltar</a>
+    `));
+    }
+                    
+    const morador = moradores[0];
+                    
+    const formContent = `
+    <div class="page-header">
+    <h2><i class="fas fa-money-bill-wave"></i> Registrar Pagamento</h2>
+    <a href='/' class="btn-primary">
+    <i class="fas fa-backward"></i> Voltar
+    </a>
+    </div>
+    
+    <div class="form-container">
+    ${req.query.error ? `<div class="error-message">${req.query.error}</div>` : ''}
+    ${req.query.success ? `<div class="success-message">${req.query.success}</div>` : ''}
+                            
+    <form method="POST" action="/pagamentos/criar/submit" onsubmit="return validarFormulario()">
+    <div class="form-group apartamento-select-container">
+    <label for="apartamento_id">Apartamento:</label>
+    <select id="apartamento_id" name="apartamento_id" required onchange="buscarDados()">
+    <option value="">Selecione um apartamento</option>
+    ${apartamentos.map(apto => `
+    <option value="${apto.id}" ${apartamentoId == apto.id ? 'selected' : ''}>
+    ${apto.bloco_descricao} - Apt ${apto.numero}
+    </option>
+    `).join('')}
+    </select>
+    <div class="select-icon">
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    </div>
+                                
+    <div class="form-group">
+    <label for="cpf">CPF do Morador:</label>
+    <input type="text" id="cpf" name="cpf" readonly value="${morador.cpf || ''}">
+    </div>
+                                
+    <div class="form-group">
+    <label for="morador">Nome do Morador:</label>
+    <input type="text" id="morador" name="morador" readonly value="${morador.nome || ''}">
+    </div>
+                                
+    <div class="form-group">
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" readonly value="${morador.telefone || ''}">
+    </div>
+                                
+    <div class="form-group">
+    <label for="referencia">Mês/Ano Referência:</label>
+    <input type="text" id="referencia" name="referencia" readonly value="${referenciaAtual.split('-')[1]}/${referenciaAtual.split('-')[0]}">
+    </div>
+                                
+    <div class="form-group">
+    <label for="vencimento">Data de Vencimento:</label>
+    <input type="text" id="vencimento" name="vencimento" readonly value="${vencimento}">
+    </div>
+                                    
+    <div class="form-group">
+    <label for="data_pagamento">Data do Pagamento:</label>
+    <input type="date" id="data_pagamento" name="data_pagamento" required>
+    </div>
+                                
+    <div class="form-group">
+    <label for="valor_pago">Valor Pago (R$):</label>
+    <input type="number" id="valor_pago" name="valor_pago" step="0.01" required>
+    </div>
+                                
+    <div class="form-actions">
+    <button type="submit" class="btn-primary">
+    <i class="fas fa-check"></i> Registrar Pagamento
+    </button>
+    </div>
+    </form>
+    </div>
+    `;
+                    
+    res.send(renderBaseTemplate(formContent));
+    });
+    } else {
+    const initialContent = `
+    <div class="page-header">
+    <h2><i class="fas fa-money-bill-wave"></i> Registrar Pagamento</h2>
+    </div>
+    
+    <div class="form-container">
+    ${req.query.error ? `<div class="error-message">${req.query.error}</div>` : ''}
+                            
+    <form method="GET" action="/pagamentos/criar">
+    <div class="form-group apartamento-select-container">
+    <label for="apartamento_id">Apartamento:</label>
+    <select id="apartamento_id" name="apartamento_id" required>
+    <option value="">Selecione um apartamento</option>
+    ${apartamentos.map(apto => `
+    <option value="${apto.id}">
+    Bloco ${apto.bloco_descricao} - Apt ${apto.numero}
+    </option>
+    `).join('')}
+    </select>
+    <div class="select-icon">
+    <i class="fas fa-chevron-down"></i>
+    </div>
+    </div>
+                            
+    <div class="form-actions">
+    <button type="submit" class="btn-primary">
+    <i class="fas fa-arrow-right"></i> Continuar
+    </button>
+    </div>
+    </form>
+    </div>
+    `;
+                
+    res.send(renderBaseTemplate(initialContent));
+    }
     });
     });
-  
+
+    app.post('/pagamentos/criar/submit', function(req, res) {
+        const { apartamento_id, data_pagamento, valor_pago } = req.body;
+    if(!apartamento_id || !data_pagamento || !valor_pago){
+    return res.redirect('/pagamentos/criar?error = Todos os campos são obrigatórios');
+    }
+
+    const obterConsultaResponsavel = 'SELECT id FROM moradores WHERE apartamento_id = ? AND responsavel = 1 LIMIT 1';
+    connection.query(obterConsultaResponsavel, [apartamento_id], function(err, moradores){
+        if (err) return res.redirect('/pagamentos/criar?error=Erro ao registrar pagamento');
+    if (moradores.length === 0) return res.redirect('/pagamentos/criar?error=Apartamento sem morador responsável');
+
+    const morador_id = moradores[0].id;
+    const referenciaAtual = new Date().toISOString().slice(0, 7) + '-01';
+    const vencimento = new Date();
+    vencimento.setMonth(vencimento.getMonth() + 1);
+    vencimento.setDate(10);
+    const vencimentoFormatado = vencimento.toISOString().split('T')[0];
+    const consultaInserirPagamento = `
+    INSERT INTO pagamentos 
+    (apartamento_id, morador_id, referencia, valor, vencimento, data_pagamento, valor_pago, status)
+    VALUES (?, ?, ?, ?, ?, ?, ?, 'pago')
+    `
+    });
+    connection.query(consultaInserirPagamento, [
+    apartamento_id, morador_id, referenciaAtual,
+    valor_pago,
+    vencimentoFormatado, data_pagamento,
+    valor_pago
+    ], function(err, result) {
+    });
+    if (err) return res.redirect('/pagamentos/criar?error-Erro ao registrar pagamento');
+    res.redirect('/pagamentos/criar?success-Pagamento registrado com sucesso');
+    });
+
+
+
 
     app.get('/manutencoes', (req, res) => {
     connection.query('SELECT * FROM manutencoes', (err, rows) => {
@@ -1403,310 +1575,336 @@ app.get('/blocos', (req, res) => {
     }
 
     .mensagem {
-                                    background: white;
-                                    padding: 30px;
-                                    border-radius: 10px;
-                                    text-align: center;
-                                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                                    border: 2px solid #f5c6cb;
-                                }
-                                .mensagem p {
-                                    font-size: 18px;
-                                    color: red;
-                                    margin-bottom: 15px;
-                                }
-                                .mensagem a {
-                                    color: white;
-                                    background-color: #6A5ACD;
-                                    padding: 10px 20px;
-                                    border-radius: 5px;
-                                    text-decoration: none;
-                                }
-                                .mensagem a:hover {
-                                    background-color: #6959CD;
-                                }
-                            </style>
-                        </head>
-                        <body>
-                            <div class="mensagem">
-                                <p>Erro ao salvar!</p>
-                                <a href="/tipoManutencao/cadastrar">Voltar</a>
-                            </div>
-                        </body>
-                        </html>
-                    `);
-                }
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 2px solid #f5c6cb;
+    }
+
+    .mensagem p {
+    font-size: 18px;
+    color: red;
+    margin-bottom: 15px;
+    }
+
+    .mensagem a {
+    color: white;
+    background-color: #6A5ACD;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    }
+
+    .mensagem a:hover {
+    background-color: #6959CD;
+    }
+
+    </style>
+    </head>
+    <body>
+    <div class="mensagem">
+    <p>Erro ao salvar!</p>
+    <a href="/tipoManutencao/cadastrar">Voltar</a>
+    </div>
+    </body>
+    </html>
+    `);
+    }
     
-                res.send(`
-                    <html>
-                    <head>
-                        <title>Sucesso</title>
-                        <style>
-                            body {
-                               background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
+    res.send(`
+    <html>
+    <head>
+    <title>Sucesso</title>
+    <style>
+
+    body {
+    background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
     background-size: cover;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                height: 100vh;
-                                font-family: Arial, sans-serif;
-                                background-color: #d4edda;
-                            }
-                            .mensagem {
-                                background: white;
-                                padding: 30px;
-                                border-radius: 10px;
-                                text-align: center;
-                                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                                border: 2px solid #c3e6cb;
-                            }
-                            .mensagem p {
-                                font-size: 18px;
-                                color:  #6A5ACD;
-                                margin-bottom: 15px;
-                            }
-                            .mensagem a {
-                                color: white;
-                                background-color: #6A5ACD;
-                                padding: 10px 20px;
-                                border-radius: 5px;
-                                text-decoration: none;
-                            }
-                            .mensagem a:hover {
-                                background-color: #6959CD;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="mensagem">
-                            <p>Dados salvos com sucesso!</p>
-                            <a href="/tiposManutencao">Voltar</a>
-                        </div>
-                    </body>
-                    </html>
-                `);
-            });
-        });
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #d4edda;
+    }
+
+    .mensagem {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border: 2px solid #c3e6cb;
+    }
+
+    .mensagem p {
+    font-size: 18px;
+    color:  #6A5ACD;
+    margin-bottom: 15px;
+    }
+
+    .mensagem a {
+    color: white;
+    background-color: #6A5ACD;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    }
+
+    .mensagem a:hover {
+    background-color: #6959CD;
+    }
+
+    </style>
+    </head>
+    <body>
+    <div class="mensagem">
+    <p>Dados salvos com sucesso!</p>
+    <a href="/tiposManutencao">Voltar</a>
+    </div>
+    </body>
+    </html>
+    `);
+    });
+    });
     });
     
 
     app.get('/tipoManutencao/registrar', (req, res) => {
     connection.query('SELECT * FROM tipos_manutencao', (err, tipos) => {
-        if (err) return res.send('Erro ao carregar tipos.');
-        const options = tipos.map(t => `<option value="${t.id}">${t.descricao}</option>`).join('');
+    if (err) return res.send('Erro ao carregar tipos.');
+    const options = tipos.map(t => `<option value="${t.id}">${t.descricao}</option>`).join('');
         
-        res.send(`
-            <html>
-            <head>
-                <title>Registrar Manutenção</title>
-                <style>
-                    html, body {
-                        height: 100%;
-                        margin: 0;
-                        padding: 0;
-                        font-family: Arial;
-                        background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
-                        background-size: cover;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
+    res.send(`
+    <html>
+    <head>
+    <title>Registrar Manutenção</title>
+    <style>
 
-                    form {
-                        background: #fff;
-                        padding: 20px;
-                        border-radius: 10px;
-                        width: 300px;
-                    }
+    html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
 
-                    input, select, button {
-                        width: 100%;
-                        padding: 10px;
-                        margin: 10px 0;
-                    }
+    form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    }
 
-                    button {
-                        background-color: #6A5ACD;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                    }
+    input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    }
 
-                    button:hover {
-                        background-color: #6959CD;
-                        transform: scale(1.05);
-                    }
-                   .botao-voltar {
-                    display: block;
-                    width: 100%;
-                    text-align: center;
-                    padding: 10px;
-                    margin: 10px 0;
-                    background-color: #6A5ACD;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    text-decoration: none;
-                    font-size: 16px;
-                    box-sizing: border-box;
-                    transition: transform 0.2s;
-                     }
+    button {
+    background-color: #6A5ACD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    }
 
-                    .botao-voltar:hover {
-                        background-color: #6959CD;
-                        transform: scale(1.05);
-                    }
-                                    </style>
-                                </head>
-                                <body>
-               <form action="/tipoManutencao/registrar" method="POST" onsubmit="return validarCampos()">
-                <label>Tipo:</label>
-                <select name="tipo" id="tipo">
-                    <option value="">Selecione</option>
-                    ${options}
-                </select><br/>
-                <label>Data:</label>
-                <input type="date" name="data" id="data"><br/>
-                <label>Local:</label>
-                <input type="text" name="local" id="local"><br/>
-                <button type="submit">Cadastrar</button>
-                <a href="/tiposManutencao" class="botao-voltar">Voltar</a>
-                <p id="erro" style="color: red; text-align: center; margin: 5px 0 0 0;"></p>
-                </form>
-                <p id="erro" style="color: red;"></p>
-             
+    button:hover {
+    background-color: #6959CD;
+    transform: scale(1.05);
+    }
 
-                <script>
-                    function validarCampos() {
-                        const tipo = document.getElementById('tipo').value;
-                        const data = document.getElementById('data').value;
-                        const local = document.getElementById('local').value;
-                        if (!tipo || !data || !local) {
-                            document.getElementById('erro').textContent = 'Dados obrigatórios não informados';
-                            return false;
-                        }
-                        return true;
-                    }
-                </script>
-            </body>
-            </html>
-        `);
+    .botao-voltar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #6A5ACD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: transform 0.2s;
+    }
+
+    .botao-voltar:hover {
+    background-color: #6959CD;
+    transform: scale(1.05);
+    }
+
+    </style>
+    </head>
+    <body>
+    <form action="/tipoManutencao/registrar" method="POST" onsubmit="return validarCampos()">
+    <label>Tipo:</label>
+    <select name="tipo" id="tipo">
+    <option value="">Selecione</option>
+    ${options}
+    </select><br/>
+    <label>Data:</label>
+    <input type="date" name="data" id="data"><br/>
+    <label>Local:</label>
+    <input type="text" name="local" id="local"><br/>
+    <button type="submit">Cadastrar</button>
+    <a href="/tiposManutencao" class="botao-voltar">Voltar</a>
+    <p id="erro" style="color: red; text-align: center; margin: 5px 0 0 0;"></p>
+    </form>
+    <p id="erro" style="color: red;"></p>
+                
+
+    <script>
+    function validarCampos() {
+    const tipo = document.getElementById('tipo').value;
+    const data = document.getElementById('data').value;
+    const local = document.getElementById('local').value;
+    if (!tipo || !data || !local) {
+    document.getElementById('erro').textContent = 'Dados obrigatórios não informados';
+    return false;
+    }
+    return true;
+    }
+
+    </script>
+    </body>
+    </html>
+    `);
     });
-});
+    });
 
 
 
-app.post('/tipoManutencao/registrar', (req, res) => {
+    app.post('/tipoManutencao/registrar', (req, res) => {
     const { tipo, data, local } = req.body;
     if (!tipo || !data || !local) {
-        return res.send(`
-            <html>
-            <head>
-                <title>Erro no Registro</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                         background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
-                        background-size: cover;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
-                    }
-                    .card {
-                        background: white;
-                        padding: 30px;
-                        border-radius: 10px;
-                        border: 2px solid #f5c6cb;
-                        color: #721c24;
-                        text-align: center;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    }
-                    a {
-                        text-decoration: none;
-                        color: #721c24;
-                        padding: 10px 20px;
-                        background-color: #f5c6cb; 
-                        border-radius: 5px;
-                    }
-                    a:hover {
-                        background-color: #f1b0b7; 
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="card">
-                    <h3>Dados obrigatórios não informados.</h3>
-                    <a href="/tipoManutencao/registrar">Voltar</a>
-                </div>
-            </body>
-            </html>
-        `);
+    return res.send(`
+    <html>
+    <head>
+    <title>Erro no Registro</title>
+    <style>
+
+    body {
+    font-family: Arial, sans-serif;
+    background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    }
+
+    .card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #f5c6cb;
+    color: #721c24;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+    text-decoration: none;
+    color: #721c24;
+    padding: 10px 20px;
+    background-color: #f5c6cb; 
+    border-radius: 5px;
+    }
+
+    a:hover {
+    background-color: #f1b0b7; 
+    }
+
+    </style>
+    </head>
+    <body>
+    <div class="card">
+    <h3>Dados obrigatórios não informados.</h3>
+    <a href="/tipoManutencao/registrar">Voltar</a>
+    </div>
+    </body>
+    </html>
+    `);
     }
 
     connection.query('INSERT INTO manutencoes (tipo_id, data, local) VALUES (?, ?, ?)', [tipo, data, local], (err) => {
-        if (err) {
-            console.error('Erro ao registrar:', err);
-            return res.send(`
-                <html>
-                <head>
-                    <title>Erro no Registro</title>
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
-                            background-size: cover;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            margin: 0;
-                        }
-                        .card {
-                            background: white;
-                            padding: 30px;
-                            border-radius: 10px;
-                            border: 2px solid #f5c6cb; 
-                            color: #721c24; 
-                            text-align: center;
-                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                        }
-                        a {
-                            text-decoration: none;
-                            color: #721c24; 
-                            padding: 10px 20px;
-                            background-color: #f5c6cb;
-                            border-radius: 5px;
-                        }
-                        a:hover {
-                            background-color: #f1b0b7; 
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="card">
-                        <h3>Erro ao registrar manutenção!</h3>
-                        <a href="/tipoManutencao/registrar">Voltar</a>
-                    </div>
-                </body>
-                </html>
-            `);
-        }
+    if (err) {
+    console.error('Erro ao registrar:', err);
+    return res.send(`
+    <html>
+    <head>
+    <title>Erro no Registro</title>
+    <style>
 
-        res.send(`
-            <html>
-            <head>
-                <title>Registro Salvo</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
-                        background-size: cover;                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        margin: 0;
+    body {
+    font-family: Arial, sans-serif;
+    background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    }
+
+    .card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #f5c6cb; 
+    color: #721c24; 
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+    text-decoration: none;
+    color: #721c24; 
+    padding: 10px 20px;
+    background-color: #f5c6cb;
+    border-radius: 5px;
+    }
+
+    a:hover {
+    background-color: #f1b0b7; 
+    }
+
+    </style>
+    </head>
+    <body>
+    <div class="card">
+    <h3>Erro ao registrar manutenção!</h3>
+    <a href="/tipoManutencao/registrar">Voltar</a>
+    </div>
+    </body>
+    </html>
+    `);
+    }
+
+    res.send(`
+    <html>
+    <head>
+    <title>Registro Salvo</title>
+    <style>
+
+    body {
+    font-family: Arial, sans-serif;
+    background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg') no-repeat center center fixed;
+    background-size: cover;                        
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
     }
 
     .card {
