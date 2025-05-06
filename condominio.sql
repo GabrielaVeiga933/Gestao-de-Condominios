@@ -1,3 +1,4 @@
+
 create database condominio;
 use condominio;
 
@@ -16,8 +17,6 @@ CREATE TABLE apartamentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     numero VARCHAR(50) NOT NULL UNIQUE,
     bloco varchar(255) NOT NULL
-     FOREIGN KEY (bloco) REFERENCES blocos(id),
-    UNIQUE KEY (bloco_id, numero)
 );
 insert into apartamentos( numero, bloco) values
 ( 10, 'Bloco A');
@@ -44,31 +43,23 @@ INSERT INTO moradores (cpf, nome, apartamento, bloco) VALUES
 ('555.666.777-88', 'Carla Pereira', '303', 'Bloco C'),
 ('999.555.222-12', 'Carlos Pereira', '301', 'Bloco C');
 
-CREATE TABLE referencia (
+
+
+
+CREATE TABLE pagamentos (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  mes TINYINT NOT NULL CHECK (mes BETWEEN 1 AND 12),
-  ano SMALLINT NOT NULL,
+  morador_id INT NOT NULL,
+  apartamento_id INT NOT NULL,
+  referencia DATE NOT NULL,
   valor DECIMAL(10,2) NOT NULL,
   vencimento DATE NOT NULL,
-  UNIQUE KEY uq_referencia (mes, ano)
+  data_pagamento DATE,
+  valor_pago DECIMAL(10,2) ,
+  STATUS ENUM('pendente', 'pago', 'atrasado') DEFAULT 'pendente',
+  FOREIGN KEY(apartamento_id) REFERENCES apartamentos(id),
+  FOREIGN KEY(morador_id) REFERENCES  moradores(id)
 );
 
-
-CREATE TABLE pagamento (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  moradores_id INT NOT NULL,
-  referencia_id INT NOT NULL,
-  data_pagamento DATE NOT NULL,
-  valor_pago DECIMAL(10,2) NOT NULL,
-  FOREIGN KEY (moradores_id) REFERENCES moradores(id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT,
-  FOREIGN KEY (referencia_id) REFERENCES referencia(id)
-    ON UPDATE CASCADE
-    ON DELETE RESTRICT,
-  UNIQUE KEY uq_pagamento (moradores_id, referencia_id)
-);
-select *from referencia;
 select *from pagamento;
 
 CREATE TABLE tipos_manutencao (
