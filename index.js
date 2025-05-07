@@ -8,12 +8,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+const sslOptions = {
+    ca: fs.readFileSync('./BaltimoreCyberTrustRoot.crt.pem'),  //caminho para o certificado CA
+}
+
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
+    host: 'aulakaren.database.windows.net',
+    user: 'root@',
+    password: 'Cedup@2025',
     database: 'condominio',
-    port:3306
+    port:3306,
+    ssl: sslOptions //opçoes de segurança
 });
 
 connection.connect(err => {
@@ -48,8 +53,6 @@ app.get('/', (req, res) => {
 app.get('/registrarManutencao', (req, res) => {
     res.sendFile(__dirname + '/registrarManutencao.html');
 });
-
-
 
 
         app.get('/blocos', (req, res) => {
