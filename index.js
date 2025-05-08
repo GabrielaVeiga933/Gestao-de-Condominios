@@ -30,7 +30,7 @@ connection.connect(err => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/inicio.html');
 });
 
 app.get('/cadastrar', (req, res) => {
