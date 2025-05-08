@@ -1,57 +1,82 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gerenciamento de Blocos</title>
-    <style>
-        
-        body {  
-                font-family: Arial, sans-serif; 
-                margin: 20px; 
-                background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
-                background-size: cover;}
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
-        }
-        th, td {
-             border: 1px solid #ddd; 
-             padding: 8px; 
-             text-align: left; 
-            }
-        th {
-             background-color: #f4f4f4; 
-            }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Início - Sistema de Condomínio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #6A5ACD;
+      --secondary: #191970;
+      --accent: #6959CD;
+      --extra: #836FFF;
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --radius: 10px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://img.freepik.com/fotos-gratis/conceito-de-plano-de-fundo-do-estudio-abstrato-vazio-luz-gradiente-roxo-estudio-quarto-fundo-para-o-produto_1258-56070.jpg?semt=ais_hybrid&w=740') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: var(--card-bg);
+      padding: 40px 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      color: var(--primary);
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+    .menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 12px 0;
+      margin: 10px 0;
+      background-color: var(--secondary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .menu-button i {
+      margin-right: 10px;
+      font-size: 1.2rem;
+    }
+    .menu-button:hover {
+      background-color: var(--accent);
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
 
-<h1>Pesquisa de Blocos</h1>
-
-<input type="text" id="search" placeholder="Pesquisar bloco...">
-<button onclick="searchBlocos()">Pesquisar</button>
-
-
-<table id="blocosTable">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-   
-    </tbody>
-</table>
-
-<script >
-      const apiUrl = 'http://localhost:3000';
-</script>
+  <div class="container">
+    <h1>Sistema de Condomínio</h1>
+    <a href="/blocos" class="menu-button"><i class="fas fa-building"></i> Gerenciar Blocos</a>
+    <a href="/apartamentos" class="menu-button"><i class="fas fa-door-open"></i> Gerenciar Apartamentos</a>
+    <a href="/moradores" class="menu-button"><i class="fas fa-user-friends"></i> Gerenciar Moradores</a>
+    <a href="/pagamentos/criar" class="menu-button"><i class="fas fa-credit-card"></i> Gerenciar Pagamentos</a>
+    <a href="/manutencoes" class="menu-button"><i class="fas fa-tools"></i> Gerenciar Manutenções</a>
+  </div>
 
 </body>
 </html>
+
